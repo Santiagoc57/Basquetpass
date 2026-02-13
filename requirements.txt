@@ -1,0 +1,17 @@
+scenedetect
+ultralytics
+torch
+torchvision
+numpy>=1.26,<2
+tqdm
+yt-dlp
+faster-whisper
+google-genai
+python-dotenv
+boto3
+
+fastapi
+uvicorn
+python-multipart
+httpx
+Pillow
