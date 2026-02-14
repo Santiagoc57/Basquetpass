@@ -92,6 +92,8 @@ Servicios:
 
 ## Variables de entorno (baloncesto)
 
+- `MAX_FILE_SIZE_MB` (default: `500`) -> limite de subida por archivo en `POST /api/process` (usa `4096` para ~4GB en Colab)
+- `MAX_CONCURRENT_JOBS` (default: `5`) -> cantidad de jobs simultaneos en backend
 - `BASKETBALL_MODE=1` -> fuerza flujo sin transcripcion/Gemini
 - `BASKET_DETECT_MODEL` (default: `yolo11n.pt`)
 - `BASKET_POSE_MODEL` (default: `yolo11n-pose.pt`)

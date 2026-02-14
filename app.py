@@ -27,7 +27,11 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 # Configuration
 # Default to 1 if not set, but user can set higher for powerful servers
 MAX_CONCURRENT_JOBS = int(os.environ.get("MAX_CONCURRENT_JOBS", "5"))
-MAX_FILE_SIZE_MB = 500  # 500 MB limit
+try:
+    MAX_FILE_SIZE_MB = int(os.environ.get("MAX_FILE_SIZE_MB", "500"))
+except Exception:
+    MAX_FILE_SIZE_MB = 500
+MAX_FILE_SIZE_MB = max(50, MAX_FILE_SIZE_MB)  # keep a sane lower bound
 JOB_RETENTION_SECONDS = 3600  # 1 hour retention
 
 # Application State
