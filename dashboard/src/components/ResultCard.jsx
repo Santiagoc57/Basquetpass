@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Download, Share2, Instagram, Youtube, Video, CheckCircle, AlertCircle, X, Loader2, Copy, Wand2, Type, Calendar, Clock, Languages } from 'lucide-react';
-import { getApiUrl } from '../config';
+import { apiFetch, getApiUrl } from '../config';
 import SubtitleModal from './SubtitleModal';
 import HookModal from './HookModal';
 import TranslateModal from './TranslateModal';
@@ -54,7 +54,7 @@ export default function ResultCard({ clip, index, jobId, uploadPostKey, uploadUs
                 throw new Error("Gemini API Key is missing. Please set it in Settings.");
             }
 
-            const res = await fetch(getApiUrl('/api/edit'), {
+            const res = await apiFetch('/api/edit', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ export default function ResultCard({ clip, index, jobId, uploadPostKey, uploadUs
         setIsSubtitling(true);
         setEditError(null);
         try {
-            const res = await fetch(getApiUrl('/api/subtitle'), {
+            const res = await apiFetch('/api/subtitle', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -141,7 +141,7 @@ export default function ResultCard({ clip, index, jobId, uploadPostKey, uploadUs
                 ? { text: hookData, position: 'top', size: 'M' }
                 : hookData;
 
-            const res = await fetch(getApiUrl('/api/hook'), {
+            const res = await apiFetch('/api/hook', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -197,7 +197,7 @@ export default function ResultCard({ clip, index, jobId, uploadPostKey, uploadUs
             console.log('[Translate] Request body:', requestBody);
             console.log('[Translate] Sending request to /api/translate');
 
-            const res = await fetch(getApiUrl('/api/translate'), {
+            const res = await apiFetch('/api/translate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -277,7 +277,7 @@ export default function ResultCard({ clip, index, jobId, uploadPostKey, uploadUs
                 payload.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
             }
 
-            const res = await fetch(getApiUrl('/api/social/post'), {
+            const res = await apiFetch('/api/social/post', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)

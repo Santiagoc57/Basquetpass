@@ -7,10 +7,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "#09090b",
-        surface: "#18181b",
-        primary: "#3b82f6",
-        accent: "#8b5cf6",
+        background: "#f8f6f6",
+        surface: "#ffffff",
+        primary: "#ee5b2b",
+        accent: "#d04115",
       },
       animation: {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',

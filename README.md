@@ -42,7 +42,7 @@ uvicorn app:app --host 0.0.0.0 --port 8000 --reload
 ```bash
 cd /path/to/openshorts-basket/dashboard
 npm install
-VITE_API_URL=http://localhost:8000 npm run dev -- --host 0.0.0.0 --port 5175
+npm run dev -- --host 0.0.0.0 --port 5175
 ```
 
 ### 3) Abrir la interfaz
@@ -57,6 +57,28 @@ open http://localhost:5175
 2. Ajusta `Number of baskets`, `Seconds before`, `Seconds after`.
 3. Click en `Generate Clips`.
 4. Revisa el panel de resultados.
+
+## Usar GPU de Colab (T4) con ngrok
+
+Tu Mac puede correr solo el frontend y mandar peticiones al backend que corre en Colab.
+
+1. En Colab levanta tu backend `uvicorn app:app --host 0.0.0.0 --port 8000` y publica con ngrok.
+2. Copia la URL publica `https://...ngrok-free.app`.
+3. En este repo configura esa URL:
+
+```bash
+cd /path/to/openshorts-basket
+./set-colab-api.sh https://TU-URL.ngrok-free.app
+```
+
+4. Reinicia el frontend:
+
+```bash
+cd /path/to/openshorts-basket/dashboard
+npm run dev -- --host 0.0.0.0 --port 5175
+```
+
+Opcional: tambien puedes pegar/cambiar la URL desde `Settings -> Backend remoto (Colab / ngrok)` dentro de la UI.
 
 ## Como iniciar con Docker
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { LayoutGrid, AlertCircle, Loader2 } from 'lucide-react';
-import { getApiUrl } from '../config';
+import { apiFetch } from '../config';
 import GalleryCard from './GalleryCard';
 
 const CLIPS_PER_PAGE = 20;
@@ -20,9 +20,7 @@ export default function Gallery() {
             if (currentOffset === 0) setLoading(true);
             else setLoadingMore(true);
 
-            const res = await fetch(
-                getApiUrl(`/api/gallery/clips?limit=${CLIPS_PER_PAGE}&offset=${currentOffset}`)
-            );
+            const res = await apiFetch(`/api/gallery/clips?limit=${CLIPS_PER_PAGE}&offset=${currentOffset}`);
             if (!res.ok) throw new Error('Failed to fetch clips');
             const data = await res.json();
 
@@ -144,4 +142,3 @@ export default function Gallery() {
         </div>
     );
 }
-

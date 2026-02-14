@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Youtube, Upload, FileVideo, X } from 'lucide-react';
 
-export default function MediaInput({ onProcess, isProcessing }) {
+export default function MediaInput({ onProcess, isProcessing, variant = 'dark' }) {
     const [mode, setMode] = useState('url'); // 'url' | 'file'
     const [url, setUrl] = useState('');
     const [file, setFile] = useState(null);
@@ -32,14 +32,16 @@ export default function MediaInput({ onProcess, isProcessing }) {
         }
     };
 
+    const isLight = variant === 'light';
+
     return (
-        <div className="bg-surface border border-white/5 rounded-2xl p-6 animate-[fadeIn_0.6s_ease-out]">
-            <div className="flex gap-4 mb-6 border-b border-white/5 pb-4">
+        <div className={`${isLight ? 'bg-white border border-slate-200 shadow-sm' : 'bg-surface border border-white/5'} rounded-2xl p-6 animate-[fadeIn_0.6s_ease-out]`}>
+            <div className={`flex gap-4 mb-6 ${isLight ? 'border-b border-slate-200' : 'border-b border-white/5'} pb-4`}>
                 <button
                     onClick={() => setMode('url')}
                     className={`flex items-center gap-2 pb-2 px-2 transition-all ${mode === 'url'
                         ? 'text-primary border-b-2 border-primary -mb-[17px]'
-                        : 'text-zinc-400 hover:text-white'
+                        : isLight ? 'text-slate-500 hover:text-slate-900' : 'text-zinc-400 hover:text-white'
                         }`}
                 >
                     <Youtube size={18} />
@@ -49,7 +51,7 @@ export default function MediaInput({ onProcess, isProcessing }) {
                     onClick={() => setMode('file')}
                     className={`flex items-center gap-2 pb-2 px-2 transition-all ${mode === 'file'
                         ? 'text-primary border-b-2 border-primary -mb-[17px]'
-                        : 'text-zinc-400 hover:text-white'
+                        : isLight ? 'text-slate-500 hover:text-slate-900' : 'text-zinc-400 hover:text-white'
                         }`}
                 >
                     <Upload size={18} />
@@ -71,19 +73,19 @@ export default function MediaInput({ onProcess, isProcessing }) {
                     </div>
                 ) : (
                     <div
-                        className={`border-2 border-dashed rounded-xl p-8 text-center transition-all ${file ? 'border-primary/50 bg-primary/5' : 'border-zinc-700 hover:border-zinc-500 bg-white/5'
+                        className={`border-2 border-dashed rounded-xl p-8 text-center transition-all ${file ? 'border-primary/50 bg-primary/5' : isLight ? 'border-slate-300 hover:border-primary/50 bg-slate-50' : 'border-zinc-700 hover:border-zinc-500 bg-white/5'
                             }`}
                         onDragOver={(e) => e.preventDefault()}
                         onDrop={handleDrop}
                     >
                         {file ? (
-                            <div className="flex items-center justify-center gap-3 text-white">
+                            <div className={`flex items-center justify-center gap-3 ${isLight ? 'text-slate-800' : 'text-white'}`}>
                                 <FileVideo className="text-primary" />
                                 <span className="font-medium">{file.name}</span>
                                 <button
                                     type="button"
                                     onClick={() => setFile(null)}
-                                    className="p-1 hover:bg-white/10 rounded-full"
+                                    className={`p-1 rounded-full ${isLight ? 'hover:bg-slate-200' : 'hover:bg-white/10'}`}
                                 >
                                     <X size={16} />
                                 </button>
@@ -96,21 +98,21 @@ export default function MediaInput({ onProcess, isProcessing }) {
                                     onChange={(e) => setFile(e.target.files?.[0] || null)}
                                     className="hidden"
                                 />
-                                <Upload className="mx-auto mb-3 text-zinc-500" size={24} />
-                                <p className="text-zinc-400">Click to upload or drag and drop</p>
-                                <p className="text-xs text-zinc-600 mt-1">MP4, MOV up to 500MB</p>
+                                <Upload className={`mx-auto mb-3 ${isLight ? 'text-slate-500' : 'text-zinc-500'}`} size={24} />
+                                <p className={isLight ? 'text-slate-600' : 'text-zinc-400'}>Click to upload or drag and drop</p>
+                                <p className={`text-xs mt-1 ${isLight ? 'text-slate-400' : 'text-zinc-600'}`}>MP4, MOV up to 500MB</p>
                             </label>
                         )}
                     </div>
                 )}
 
-                <div className="mt-5 p-4 rounded-xl border border-white/10 bg-black/20 space-y-3">
-                    <div className="text-xs uppercase tracking-wider text-zinc-400 font-semibold">
+                <div className={`mt-5 p-4 rounded-xl space-y-3 ${isLight ? 'border border-slate-200 bg-slate-50' : 'border border-white/10 bg-black/20'}`}>
+                    <div className={`text-xs uppercase tracking-wider font-semibold ${isLight ? 'text-slate-600' : 'text-zinc-400'}`}>
                         Basketball Clip Settings
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <label className="text-left">
-                            <div className="text-[11px] text-zinc-500 mb-1">Number of baskets</div>
+                            <div className={`text-[11px] mb-1 ${isLight ? 'text-slate-500' : 'text-zinc-500'}`}>Number of baskets</div>
                             <input
                                 type="number"
                                 min="1"
@@ -122,7 +124,7 @@ export default function MediaInput({ onProcess, isProcessing }) {
                             />
                         </label>
                         <label className="text-left">
-                            <div className="text-[11px] text-zinc-500 mb-1">Seconds before</div>
+                            <div className={`text-[11px] mb-1 ${isLight ? 'text-slate-500' : 'text-zinc-500'}`}>Seconds before</div>
                             <input
                                 type="number"
                                 min="0.5"
@@ -134,7 +136,7 @@ export default function MediaInput({ onProcess, isProcessing }) {
                             />
                         </label>
                         <label className="text-left">
-                            <div className="text-[11px] text-zinc-500 mb-1">Seconds after</div>
+                            <div className={`text-[11px] mb-1 ${isLight ? 'text-slate-500' : 'text-zinc-500'}`}>Seconds after</div>
                             <input
                                 type="number"
                                 min="0.5"
@@ -146,7 +148,7 @@ export default function MediaInput({ onProcess, isProcessing }) {
                             />
                         </label>
                     </div>
-                    <div className="text-[11px] text-zinc-500">
+                    <div className={`text-[11px] ${isLight ? 'text-slate-500' : 'text-zinc-500'}`}>
                         Example: `4` baskets, `4s` before and `6s` after each detected play.
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 # OpenShorts Basket Roadmap
 
-Ultima actualizacion: 2026-02-13
+Ultima actualizacion: 2026-02-14
 
 Este documento es la fuente de verdad para:
 - direccion de producto
@@ -32,6 +32,8 @@ Implementado:
   - cantidad de clips objetivo
   - segundos antes del evento
   - segundos despues del evento
+- UI con configuracion de backend remoto (Colab/ngrok) para usar GPU externa
+- soporte frontend para override de API base URL + header `ngrok-skip-browser-warning`
 
 Limitaciones conocidas:
 - sin clase aro dedicada, la deteccion de canasta anotada no es totalmente confiable
@@ -123,6 +125,11 @@ P2:
 - extraccion multi-clip basada en eventos detectados
 - controles UI para cantidad de canastas y ventana pre/post
 - README y roadmap pasados a espanol
+
+2026-02-14:
+- integracion de backend remoto via Colab/ngrok desde configuracion del dashboard
+- script `set-colab-api.sh` para setear `dashboard/.env.local` rapido
+- `vite.config.js` actualizado para `VITE_PROXY_TARGET` + headers ngrok
 
 ## 8) Regla de mantenimiento
 
